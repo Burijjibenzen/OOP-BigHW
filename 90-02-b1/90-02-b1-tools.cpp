@@ -40,9 +40,12 @@ void input(int* h, int* w)
 /*生成内部数组*/
 void generate_array(char(*p)[22], int& h, int& w)
 {
-	for (int i = 0; i < h + 5 + 1; i++)
-		for (int j = 0; j < w + 1; j++)
+	int i, j;
+	for (i = 0; i < h + 5 + 1; i++)
+		for (j = 0; j < w + 1; j++)
 			p[i][j] = '*'; //初始化为*
+	for (j = 0; j < w + 1; j++)
+		p[i][j] = '0';//最后一行全为0，方便下落判定
 }
 
 /*打印当前数组*/
@@ -98,11 +101,11 @@ void generate_num(char(*p)[22], int& h, int& w, int& cntr_x, int& cntr_y, int& c
 	else {
 		if (w % 2 == 0) {
 			cntr_x = w / 2;
-			cntr_y = 3;
+			cntr_y = 3 - 5;
 		}
 		else {
 			cntr_x = (w + 1) / 2;
-			cntr_y = 3;
+			cntr_y = 3 - 5;
 		}
 	}
 	switch (current_num) {
@@ -240,7 +243,7 @@ void end(void)
 {
 	while (1) {
 		cct_setcolor();
-		cout << "本小题结束，请输入End继续...";
+		cout << "本小题结束，请输入End继续";
 		char ending[4] = { 0 };
 		cin.get(ending, 4, '\n');
 		cin.clear();
