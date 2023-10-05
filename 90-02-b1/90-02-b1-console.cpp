@@ -158,6 +158,7 @@ void opr(char(*p)[22], int current_num, int& h, int& w, int cntr_x, int cntr_y, 
 	int ret;
 	int keycode1, keycode2;
 	int loop = 1;
+	int sum = 0; //对于每一个数字的旋转 给予一个标号
 
 	unsigned int interval;
 	DWORD t1, t2;
@@ -180,6 +181,10 @@ void opr(char(*p)[22], int current_num, int& h, int& w, int cntr_x, int cntr_y, 
 							switch (keycode2) {
 								case KB_ARROW_DOWN:
 									interval = interval / 4;
+									break;
+								case KB_ARROW_UP:
+									if (mode != 2)
+										rotate(p, h, w, cntr_x, cntr_y, current_num, sum, mode);
 									break;
 								default:
 									break;

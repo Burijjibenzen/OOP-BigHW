@@ -17,7 +17,8 @@ void menu1()
 	generate_array(inner_array, height, width);
 	generate_num(inner_array, height, width, cntr_x, cntr_y, current_num, 1);
 	current_array(inner_array, height, width);
-	rotate(inner_array, height, width, cntr_x, cntr_y, current_num);
+	int sum = 0;
+	rotate1(inner_array, height, width, cntr_x, cntr_y, current_num, sum, 1);
 	end();
 }
 
@@ -45,7 +46,24 @@ void menu2()
 
 void menu3()
 {
+	cct_cls();
+	int width, height;
+	input(&height, &width);
+	cct_setconsoleborder(width * 3 * 2 + 40, height * 3 + 6);
+	cct_setcursor(CURSOR_INVISIBLE);
+	frame(height, width);
+	char inner_array[26 + 1 + 5 + 1][22];//多定义一个，统一下标，方便自己理解 加5是因为一点点下落，有一个逐步的过程
+	int cntr_x = 0, cntr_y = 0;
+	int current_num = get_next_num(true, (unsigned int)time(0));
+	int next_num = get_next_num(false, (unsigned int)time(0));
+	tips(next_num, 0, 0, width);
+	generate_array(inner_array, height, width);
+	generate_num(inner_array, height, width, cntr_x, cntr_y, current_num, 3);
 
+	opr(inner_array, current_num, height, width, cntr_x, cntr_y, 0, 3);
+	current_num = next_num;
+	cct_gotoxy(width * 6 + 10, 7);
+	end();
 }
 
 void menu4()
