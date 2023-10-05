@@ -39,18 +39,19 @@ void input(int* h, int* w)
 }
 
 /*生成内部数组*/
-void generate_array(char(*p)[22], int& h, int& w)
+void generate_array(char(*p)[23], int& h, int& w)
 {
 	int i, j;
-	for (i = 0; i < h + 5 + 1; i++)
-		for (j = 0; j < w + 1; j++)
+	for (i = 0; i < 33; i++)
+		for (j = 0; j < 23; j++)
+			p[i][j] = '#'; //边界全为#，方便碰撞检测
+	for (i = 1; i < h + 5 + 1; i++)
+		for (j = 1; j < w + 1; j++)
 			p[i][j] = '*'; //初始化为*
-	for (j = 0; j < w + 1; j++)
-		p[i][j] = '#';//最后一行全为#，方便下落判定
 }
 
 /*打印当前数组*/
-void current_array(char(*p)[22], int& h, int& w)
+void current_array(char(*p)[23], int& h, int& w)
 {
 	cout << "当前数组：\n";
 	cout << "  |";
@@ -86,7 +87,7 @@ int get_next_num(const bool new_seed = false, const unsigned int seed = 0)
 }
 
 /*生成命令行下数字初始位置/初始化下落数字*/
-void generate_num(char(*p)[22], int& h, int& w, int& cntr_x, int& cntr_y, int& current_num, int mode)
+void generate_num(char(*p)[23], int& h, int& w, int& cntr_x, int& cntr_y, int& current_num, int mode)
 {
 	if (mode == 1) {
 		srand((unsigned int)time(0));
@@ -264,7 +265,7 @@ void end(void)
 }
 
 /*旋转*/
-void rotate1(char(*p)[22], int& h, int& w, int& cntr_x, int& cntr_y, int current_num, int& sum, int mode)
+void rotate1(char(*p)[23], int& h, int& w, int& cntr_x, int& cntr_y, int current_num, int& sum, int mode)
 {
 	int ret;
 	int keycode1, keycode2;
@@ -304,7 +305,7 @@ void rotate1(char(*p)[22], int& h, int& w, int& cntr_x, int& cntr_y, int current
 
 }
 
-void rotate(char(*p)[22], int& h, int& w, int& cntr_x, int& cntr_y, int current_num, int& sum, int mode)
+void rotate(char(*p)[23], int& h, int& w, int& cntr_x, int& cntr_y, int current_num, int& sum, int mode)
 {
 	if (cntr_x <= 2 || cntr_x >= w - 1 || cntr_y >= h - 1) {
 		if (mode == 1)
@@ -842,7 +843,7 @@ void rotate(char(*p)[22], int& h, int& w, int& cntr_x, int& cntr_y, int current_
 }
 
 /*旋转对应的画格子函数*/
-void cmd_rotate_clear(char(*p)[22], int& cntr_x, int& cntr_y, int current_num, int mode)
+void cmd_rotate_clear(char(*p)[23], int& cntr_x, int& cntr_y, int current_num, int mode)
 {
 	int i, j;
 	for (i = cntr_y + 2 + 5; i >= cntr_y - 2 + 5; i--)
@@ -855,7 +856,7 @@ void cmd_rotate_clear(char(*p)[22], int& cntr_x, int& cntr_y, int current_num, i
 			}
 }
 
-void cmd_rotate_draw(char(*p)[22], int& cntr_x, int& cntr_y, int current_num, int mode)
+void cmd_rotate_draw(char(*p)[23], int& cntr_x, int& cntr_y, int current_num, int mode)
 {
 	if (mode == 1)
 		return;

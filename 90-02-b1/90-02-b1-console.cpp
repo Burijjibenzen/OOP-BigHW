@@ -116,7 +116,7 @@ void clear(int x_star, int y_star)
 }
 
 /*下落的函数*/
-void fall(char(*p)[22], int current_num, int cntr_x, int cntr_y, int& judge)
+void fall(char(*p)[23], int current_num, int cntr_x, int cntr_y, int& judge)
 {
 	//下落的本质
 	// 能否下落的判断 以中心坐标为中心的5*5方格，从头开始遍历，如果有当前为对应数字且下方为0，则停止下落，否则继续
@@ -152,8 +152,71 @@ void fall(char(*p)[22], int current_num, int cntr_x, int cntr_y, int& judge)
 	}
 }
 
+/*左移*/
+void left(char(*p)[23], int current_num, int& cntr_x, int cntr_y)
+{
+	//平移的本质
+	// 能否左移的判断 判断cntr_x
+	//如果可以，以中心坐标为中心，从左向右循环，如果有当前为对应数字，则置*，左方*变成当前数字
+	cntr_y += 5; //方便人看，纵坐标一直加5怪烦的
+	int i, j, judge = 0; //mark是否下落
+	if ((current_num == 1 && cntr_x <= 1) || cntr_x <= 2)
+		return; //原始形状触碰原始边界
+	for (j = cntr_x - 2; j <= cntr_x + 2; j++)
+		for (i = cntr_y - 2; i <= cntr_y + 2; i++)
+			if (p[i][j] == current_num + 48 && p[i][j - 1] == '#') {
+				judge = 1;
+				return;
+			}
+	if (judge != 1) {
+		for (j = cntr_x - 2; j <= cntr_x + 2; j++)
+			for (i = cntr_y + 2; i >= cntr_y - 2; i--)
+				if (p[i][j] == current_num + 48 && p[i][j - 1] == '*') {
+					//ij处变成白的
+					if (i > 5)
+						clear(6 * j - 4, 3 * i - 17);
+					p[i][j] = '*';
+					//ij-1处变成星星
+					if (i > 5)
+						star(6 * (j - 1) - 4, 3 * i - 17, current_num);
+					p[i][j - 1] = current_num + 48;
+				}
+		cntr_x--;
+	}
+}
+
+/*右移*/
+void right(char(*p)[23], int current_num, int& cntr_x, int cntr_y, int w)
+{
+	cntr_y += 5; //方便人看，纵坐标一直加5怪烦的
+	int i, j, judge = 0; //mark是否下落
+	if ((current_num == 1 && cntr_x >= w) || cntr_x >= w - 1)
+		return; //原始形状触碰原始边界
+	for (j = cntr_x + 2; j >= cntr_x - 2; j--)
+		for (i = cntr_y - 2; i <= cntr_y + 2; i++)
+			if (p[i][j] == current_num + 48 && p[i][j + 1] == '#') {
+				judge = 1;
+				return;
+			}
+	if (judge != 1) {
+		for (j = cntr_x + 2; j >= cntr_x - 2; j--)
+			for (i = cntr_y + 2; i >= cntr_y - 2; i--)
+				if (p[i][j] == current_num + 48 && p[i][j + 1] == '*') {
+					//ij处变成白的
+					if (i > 5)
+						clear(6 * j - 4, 3 * i - 17);
+					p[i][j] = '*';
+					//ij-1处变成星星
+					if (i > 5)
+						star(6 * (j + 1) - 4, 3 * i - 17, current_num);
+					p[i][j + 1] = current_num + 48;
+				}
+		cntr_x++;
+	}
+}
+
 /*上下左右*/
-void opr(char(*p)[22], int current_num, int& h, int& w, int cntr_x, int cntr_y, int score, int mode)
+void opr(char(*p)[23], int current_num, int& h, int& w, int cntr_x, int cntr_y, int score, int mode)
 {
 	int ret;
 	int keycode1, keycode2;
@@ -185,6 +248,14 @@ void opr(char(*p)[22], int current_num, int& h, int& w, int cntr_x, int cntr_y, 
 								case KB_ARROW_UP:
 									if (mode != 2)
 										rotate(p, h, w, cntr_x, cntr_y, current_num, sum, mode);
+									break;
+								case KB_ARROW_LEFT:
+									if (mode != 2 && mode != 3)
+										left(p, current_num, cntr_x, cntr_y);
+									break;
+								case KB_ARROW_RIGHT:
+									if (mode != 2 && mode != 3)
+										right(p, current_num, cntr_x, cntr_y, w);
 									break;
 								default:
 									break;
