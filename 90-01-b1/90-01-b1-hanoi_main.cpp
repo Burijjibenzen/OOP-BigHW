@@ -16,7 +16,7 @@
    ----------------------------------------------------------------------------------- */
 #include "../include/cmd_console_tools.h"
 #include "./90-01-b1-hanoi.h"
-#include "../include/common_menu.h"
+#include "../include/common_functions.h"
 #include <iostream>
 #include <iomanip>
 using namespace std;

@@ -2,7 +2,7 @@
 #include <iostream>
 #include "../include/cmd_console_tools.h"
 #include "./90-01-b2.h"
-#include "../include/common_menu.h"
+#include "../include/common_functions.h"
 #include <conio.h>
 #include <Windows.h>
 using namespace std;
@@ -11,7 +11,7 @@ void menu_A(void)
 {
 	cct_cls();
 	int row, col;
-	input(&row, &col);
+	input(&row, &col, 2);
 
 	int inner_array[12][12] = { 0 };
 	generate_array(inner_array, row, col);
@@ -39,7 +39,7 @@ void menu_B(void)
 {
 	cct_cls();
 	int row, col, total = 0;
-	input(&row, &col);
+	input(&row, &col, 2);
 
 	int inner_array[12][12] = { 0 };
 	generate_array(inner_array, row, col);
@@ -83,7 +83,7 @@ void menu_C(void)
 {
 	cct_cls();
 	int row, col, total = 0;
-	input(&row, &col);
+	input(&row, &col, 2);
 
 	int inner_array[12][12] = { 0 };
 	generate_array(inner_array, row, col);
@@ -141,7 +141,7 @@ void menu_D(void)
 {
 	cct_cls();
 	int row, col, total = 0;
-	input(&row, &col);
+	input(&row, &col, 2);
 	int inner_array[12][12] = { 0 };
 	generate_array(inner_array, row, col);
 
@@ -156,7 +156,7 @@ void menu_E(void)
 {
 	cct_cls();
 	int row, col, total = 0;
-	input(&row, &col);
+	input(&row, &col, 2);
 	int inner_array[12][12] = { 0 };
 	generate_array(inner_array, row, col);
 
@@ -171,7 +171,7 @@ void menu_F(void)
 {
 	cct_cls();
 	int row, col, total = 0;
-	input(&row, &col);
+	input(&row, &col, 2);
 	int inner_array[12][12] = { 0 };
 	generate_array(inner_array, row, col);
 
@@ -186,7 +186,7 @@ void menu_G(void)
 {
 	cct_cls();
 	int row, col, total = 0;
-	input(&row, &col);
+	input(&row, &col, 2);
 	int inner_array[12][12] = { 0 };
 	while (1) {
 		generate_array(inner_array, row, col);

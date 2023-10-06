@@ -7,35 +7,6 @@
 #include <Windows.h>
 using namespace std;
 
-/*输入行列*/
-void input(int* row, int* col)
-{
-	while (1) {
-		cout << "请输入行数(8-10)：\n";
-		cin >> *row;
-		if (cin.good() == 0) {
-			cin.clear();
-			cin.ignore(65536, '\n');
-		}
-		else if (*row > 10 || *row < 8)
-			continue;
-		else break;
-	}
-	while (1) {
-		cout << "请输入列数(8-10)：\n";
-		cin >> *col;
-		if (cin.good() == 0) {
-			cin.clear();
-			cin.ignore(65536, '\n');
-		}
-		else if (*col > 10 || *col < 8)
-			continue;
-		else break;
-	}
-	cout << endl;
-	cin.ignore(65536, '\n');
-}
-
 /*生成内部数组*/
 void generate_array(int p[][12], int& r, int& c)
 {

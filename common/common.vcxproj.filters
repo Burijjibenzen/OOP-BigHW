@@ -18,7 +18,7 @@
     <ClCompile Include="cmd_console_tools.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="common_menu.cpp">
+    <ClCompile Include="common_functions.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

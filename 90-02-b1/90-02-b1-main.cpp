@@ -1,7 +1,7 @@
 /* 2251206 计科 冯羽芯 */
 #include <iostream>
 #include "../include/cmd_console_tools.h"
-#include "../include/common_menu.h"
+#include "../include/common_functions.h"
 #include "90-02-b1.h"
 #include <Windows.h>
 using namespace std;
@@ -10,7 +10,7 @@ void menu1()
 {
 	cct_cls();
 	int width, height;
-	input(&height, &width);
+	input(&height, &width, 3);
 	char inner_array[26 + 1 + 5 + 1][23];//多定义边界，统一下标，方便自己理解  加5是因为存储未显示的值
 
 	int cntr_x = 0, cntr_y = 0, current_num = get_next_num(true, (unsigned int)time(0));
@@ -26,7 +26,7 @@ void menu2()
 {
 	cct_cls();
 	int width, height;
-	input(&height, &width);
+	input(&height, &width, 3);
 	cct_setconsoleborder(width * 3 * 2 + 40, height * 3 + 6);
 	cct_setcursor(CURSOR_INVISIBLE);
 	frame(height, width);
@@ -52,7 +52,7 @@ void menu3()
 {
 	cct_cls();
 	int width, height;
-	input(&height, &width);
+	input(&height, &width, 3);
 	cct_setconsoleborder(width * 3 * 2 + 40, height * 3 + 6);
 	cct_setcursor(CURSOR_INVISIBLE);
 	frame(height, width);
@@ -78,7 +78,7 @@ void menu4()
 {
 	cct_cls();
 	int width, height;
-	input(&height, &width);
+	input(&height, &width, 3);
 	cct_setconsoleborder(width * 3 * 2 + 40, height * 3 + 6);
 	cct_setcursor(CURSOR_INVISIBLE);
 	frame(height, width);
@@ -104,7 +104,7 @@ void menu5()
 {
 	cct_cls();
 	int width, height;
-	input(&height, &width);
+	input(&height, &width, 3);
 	cct_setconsoleborder(width * 3 * 2 + 40, height * 3 + 6);
 	cct_setcursor(CURSOR_INVISIBLE);
 	frame(height, width);
@@ -140,7 +140,7 @@ void menu6()
 {
 	cct_cls();
 	int width, height;
-	input(&height, &width);
+	input(&height, &width, 3);
 	cct_setconsoleborder(width * 3 * 2 + 40, height * 3 + 6);
 	cct_setcursor(CURSOR_INVISIBLE);
 	frame(height, width);

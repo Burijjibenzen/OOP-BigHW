@@ -8,7 +8,6 @@ void menu_D(void);
 void menu_E(void);
 void menu_F(void);
 void menu_G(void);
-void input(int* row, int* col);
 
 void generate_array(int p[][12], int& r, int& c);
 void current_array(int p[][12], int& r, int& c);
@@ -34,5 +33,4 @@ int MouseKey(int p[][12], int r, int c, bool split, char menu, int* total_score)
 int selected(char result[][12], int p[][12], int x, int y, int r, int c, bool split, int* x_key, int* y_key, char* coordinate, int* total_score);
 void move(int p[][12], int r, int c, char menu, bool split);
 void change_color(int p[][12], int x_p, int y_p, int fg_color);
-void star(int x_star, int y_star);
 void bonus(int left, int* total);

@@ -1,9 +1,10 @@
-//2251206 ∑Î”–æ –≈06
+//2251206 ∑Î”–æ –≈06 
 #include <iostream>
 #include <iomanip>
 #include <Windows.h>
 #include "../include/cmd_console_tools.h"
 #include "./90-01-b2.h"
+#include "../include/common_functions.h"
 using namespace std;
 
 /*∆¡ƒª…Ë÷√*/
@@ -1750,15 +1751,4 @@ void change_color(int p[][12], int x_p, int y_p, int fg_color)
 		cct_setcolor(COLOR_CYAN, fg_color);
 	if (p[x_p][y_p] == 5)
 		cct_setcolor(COLOR_HRED, fg_color);
-}
-
-/*¥Ú”°–«–«*/
-void star(int x_star, int y_star)
-{
-	cct_gotoxy(x_star, y_star);
-	cout << "®X®T®[";
-	cct_gotoxy(x_star, y_star + 1);
-	cout << "®U°Ô®U";
-	cct_gotoxy(x_star, y_star + 2);
-	cout << "®^®T®a";
 }

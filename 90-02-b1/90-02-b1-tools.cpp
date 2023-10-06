@@ -7,36 +7,8 @@
 #include <time.h>
 #include <Windows.h>
 #include <conio.h>
+#include "../include/common_functions.h"
 using namespace std;
-
-/*输入行列*/
-void input(int* h, int* w)
-{
-	while (1) {
-		cout << "请输入高度(18-26)：\n";
-		cin >> *h;
-		if (cin.good() == 0) {
-			cin.clear();
-			cin.ignore(65536, '\n');
-		}
-		else if (*h > 26 || *h < 18)
-			continue;
-		else break;
-	}
-	while (1) {
-		cout << "请输入宽度(12-21,且为3的倍数)：\n";
-		cin >> *w;
-		if (cin.good() == 0) {
-			cin.clear();
-			cin.ignore(65536, '\n');
-		}
-		else if (*w > 21 || *w < 12 || *w % 3 != 0)
-			continue;
-		else break;
-	}
-	cout << endl;
-	cin.ignore(65536, '\n');
-}
 
 /*生成内部数组*/
 void generate_array(char(*p)[23], int& h, int& w)
