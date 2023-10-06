@@ -245,7 +245,8 @@ void end(void)
 {
 	while (1) {
 		cct_setcolor();
-		cout << "本小题结束，请输入End继续";
+		cout << "本小题结束，请输入End继续...";
+		cct_setcursor(CURSOR_VISIBLE_NORMAL);
 		char ending[4] = { 0 };
 		cin.get(ending, 4, '\n');
 		cin.clear();

@@ -19,8 +19,10 @@ void tips(int& next_num, int score, int line, int& w);
 void star(int x_star, int y_star, int current_num);
 void clear(int x_star, int y_star);
 
-void fall(char(*p)[23], int current_num, int cntr_x, int cntr_y, int& judge);
+int clearup(char(*p)[23], char(*q)[23], int& h, int& w);
+int fall(char(*p)[23], char(*q)[23], int current_num, int cntr_x, int cntr_y, int& h, int& w, int& judge, int& line, int mode);
 void left(char(*p)[23], int current_num, int& cntr_x, int cntr_y);
 void right(char(*p)[23], int current_num, int& cntr_x, int cntr_y, int w);
 void rotate(char(*p)[23], int& h, int& w, int& cntr_x, int& cntr_y, int current_num, int& sum, int mode);
-void opr(char(*p)[23], int current_num, int& h, int& w, int cntr_x, int cntr_y, int score, int mode);
+int opr(char(*p)[23], char(*q)[23], int current_num, int& h, int& w, int cntr_x, int cntr_y, int& score, int& line, int mode);
+int death(char(*p)[23], int w);

@@ -65,7 +65,7 @@ void tips(int& next_num, int score, int line, int& w)
 	cct_gotoxy(w * 6 + 10, 4);
 	cout << "当前得分：" << score;
 	cct_gotoxy(w * 6 + 10, 5);
-	cout << "消除总行数：" << line;
+	cout << "本次消除行数：" << line;
 	cct_gotoxy(w * 6 + 10, 6);
 	cout << "按esc键退出";
 }
@@ -116,24 +116,30 @@ void clear(int x_star, int y_star)
 }
 
 /*下落的函数*/
-void fall(char(*p)[23], int current_num, int cntr_x, int cntr_y, int& judge)
+int fall(char(*p)[23], char(*q)[23], int current_num, int cntr_x, int cntr_y, int& h, int& w, int& judge, int& line, int mode)
 {
 	//下落的本质
 	// 能否下落的判断 以中心坐标为中心的5*5方格，从头开始遍历，如果有当前为对应数字且下方为0，则停止下落，否则继续
 	//以中心坐标为中心，从最后一排开始向上循环，如果有当前为对应数字，则置*，下方*变成当前数字
 	cntr_y += 5; //方便人看，纵坐标一直加5怪烦的
-	int i, j; //mark是否下落
+	int i, j; //judge是否下落
 	for (i = cntr_y - 2; i <= cntr_y + 2; i++)
 		for (j = cntr_x - 2; j <= cntr_x + 2; j++)
 			if (p[i][j] == current_num + 48 && p[i + 1][j] == '#')
 				judge = 1;
 	if (judge == 1) {
-		//当前内容变成0
+		//当前内容变成# color数组中存颜色信息
 		for (i = cntr_y - 2; i <= cntr_y + 2; i++)
 			for (j = cntr_x - 2; j <= cntr_x + 2; j++)
-				if (p[i][j] == current_num + 48)
+				if (p[i][j] == current_num + 48) {
 					p[i][j] = '#';
-		return; //停止下落
+					q[i][j] = current_num + 48;
+				}
+		line = clearup(p, q, h, w);
+		if (line != 0 && mode == 5)
+			return 1; //停止下落
+		else
+			return 0;
 	}
 	else {
 		//下落
@@ -150,6 +156,7 @@ void fall(char(*p)[23], int current_num, int cntr_x, int cntr_y, int& judge)
 					p[i + 1][j] = current_num + 48;
 				}
 	}
+	return 0;
 }
 
 /*左移*/
@@ -160,7 +167,7 @@ void left(char(*p)[23], int current_num, int& cntr_x, int cntr_y)
 	//如果可以，以中心坐标为中心，从左向右循环，如果有当前为对应数字，则置*，左方*变成当前数字
 	cntr_y += 5; //方便人看，纵坐标一直加5怪烦的
 	int i, j, judge = 0; //mark是否下落
-	if ((current_num == 1 && cntr_x <= 1) || cntr_x <= 2)
+	if ((current_num == 1 && cntr_x <= 1) || (current_num != 1 && cntr_x <= 2))
 		return; //原始形状触碰原始边界
 	for (j = cntr_x - 2; j <= cntr_x + 2; j++)
 		for (i = cntr_y - 2; i <= cntr_y + 2; i++)
@@ -190,7 +197,7 @@ void right(char(*p)[23], int current_num, int& cntr_x, int cntr_y, int w)
 {
 	cntr_y += 5; //方便人看，纵坐标一直加5怪烦的
 	int i, j, judge = 0; //mark是否下落
-	if ((current_num == 1 && cntr_x >= w) || cntr_x >= w - 1)
+	if ((current_num == 1 && cntr_x >= w) || (current_num != 1 && cntr_x >= w - 1))
 		return; //原始形状触碰原始边界
 	for (j = cntr_x + 2; j >= cntr_x - 2; j--)
 		for (i = cntr_y - 2; i <= cntr_y + 2; i++)
@@ -216,7 +223,7 @@ void right(char(*p)[23], int current_num, int& cntr_x, int cntr_y, int w)
 }
 
 /*上下左右*/
-void opr(char(*p)[23], int current_num, int& h, int& w, int cntr_x, int cntr_y, int score, int mode)
+int opr(char(*p)[23], char(*q)[23], int current_num, int& h, int& w, int cntr_x, int cntr_y, int& score, int& line, int mode)
 {
 	int ret;
 	int keycode1, keycode2;
@@ -229,7 +236,7 @@ void opr(char(*p)[23], int current_num, int& h, int& w, int cntr_x, int cntr_y, 
 		t1 = GetTickCount();
 		while (1) {
 			if (score < 120) //下落的时间间隔
-				interval = (int)((1 - score % 15 * 0.1) * 1000);
+				interval = (int)((1 - score / 15 * 0.1) * 1000);
 			else
 				interval = 300;
 
@@ -243,7 +250,7 @@ void opr(char(*p)[23], int current_num, int& h, int& w, int cntr_x, int cntr_y, 
 							keycode2 = _getch();
 							switch (keycode2) {
 								case KB_ARROW_DOWN:
-									interval = interval / 4;
+									interval = interval / 8;
 									break;
 								case KB_ARROW_UP:
 									if (mode != 2)
@@ -262,7 +269,7 @@ void opr(char(*p)[23], int current_num, int& h, int& w, int cntr_x, int cntr_y, 
 							}
 							break;
 						case 27:	//ESC键
-							return;
+							return 1;
 							break;
 						default:
 							break;
@@ -273,12 +280,26 @@ void opr(char(*p)[23], int current_num, int& h, int& w, int cntr_x, int cntr_y, 
 			}
 			t2 = GetTickCount();
 			if (mode == 2 && cntr_y == h - 2)
-				return;
+				return -1;
 			if ((t2 - t1) >= interval) {
 				int judge = 0;
-				fall(p, current_num, cntr_x, cntr_y, judge);
-				if (judge == 1)//无法继续
-					return;
+				if (fall(p, q, current_num, cntr_x, cntr_y, h, w, judge, line, mode) == 1)
+					return 2;
+
+				if (judge == 1) {   //无法继续
+					//判断是否可以进行消除
+					if (line == 1)
+						score += 1;
+					else if (line == 2)
+						score += 3;
+					else if (line == 3)
+						score += 6;
+					else if (line == 4)
+						score += 10;
+					else if (line == 5)
+						score += 15;
+					return -1;
+				}
 				else {
 					cntr_y++;
 					break;
@@ -286,4 +307,71 @@ void opr(char(*p)[23], int current_num, int& h, int& w, int cntr_x, int cntr_y, 
 			}
 		}
 	}
+	return 0;
+}
+
+/*死没死*/
+int death(char(*p)[23], int w)
+{
+	//判断前五行有没有# 有则游戏结束
+	for (int i = 1; i <= 5; i++)
+		for (int j = 1; j <= w; j++)
+			if (p[i][j] == '#') {
+				cct_gotoxy(w * 6 + 10, 7);
+				cout << "Game Over";
+				return 1;
+			}
+	return 0;
+}
+
+/*消除*/
+int clearup(char(*p)[23], char(*q)[23], int& h, int& w)
+{
+	int line = 0;
+	//从下往上找，有没有一整行#的，有的话一整行置*，#在下面，颜色同理
+	for (int i = h + 5; i >= 1 + 5; i--) {
+		int num = 0;
+		for (int j = 1; j <= w; j++) {
+			if (p[i][j] == '#')
+				num++;
+		}
+		if (num == w) {
+			line++;
+			for (int j = 1; j <= w; j++) {
+				p[i][j] = '*';
+				q[i][j] = '*';
+			}
+		}
+	}
+	//上方行下移，第一行变成*
+	for (int k = 1; k <= line; k++) {
+		for (int i = h + 5; i >= 1 + 5; i--) {
+			int num = 0;
+			for (int j = 1; j <= w; j++) {
+				if (p[i][j] == '*')
+					num++;
+			}
+			if (num == w) {
+				for (int m = i; m >= 1 + 5 + 1; m--) {
+					for (int j = 1; j <= w; j++) {
+						p[m][j] = p[m - 1][j];
+						q[m][j] = q[m - 1][j];
+					}
+				}
+				for (int j = 1; j <= w; j++) {
+					p[6][j] = '*';
+					q[6][j] = '*';
+				}
+			}
+		}
+	}
+
+	for (int i = 1 + 5; i <= h + 5; i++)
+		for (int j = 1; j <= w; j++) {
+			if (q[i][j] == '*')
+				clear(6 * j - 4, 3 * i - 17);
+			else
+				star(6 * j - 4, 3 * i - 17, q[i][j] - '0');
+		}
+	return line;
 }
