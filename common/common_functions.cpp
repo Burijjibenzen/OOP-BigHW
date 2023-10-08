@@ -24,143 +24,45 @@ using namespace std;
   返 回 值：
   说    明：
 ***************************************************************************/
-int menu(int i)
+int Menu(const char* p[], const char* chc, int size, int prj)
 {
-	if (i == 1) {
-		cct_cls();
-		cout << "---------------------------------" << endl;
-		cout << "1.基本解" << endl;
-		cout << "2.基本解(步数记录)" << endl;
-		cout << "3.内部数组显示(横向)" << endl;
-		cout << "4.内部数组显示(纵向+横向)" << endl;
-		cout << "5.图形解-预备-画三个圆柱" << endl;
-		cout << "6.图形解-预备-在起始柱上画n个盘子" << endl;
-		cout << "7.图形解-预备-第一次移动" << endl;
-		cout << "8.图形解-自动移动版本" << endl;
-		cout << "9.图形解-游戏版" << endl;
-		cout << "0.退出" << endl;
-		cout << "---------------------------------" << endl;
-		cout << "[请选择:] ";
-
-		char choice;
-		while (1) {
-			choice = _getche();
-			if (choice == '0')
-				return 0;
-			else if (choice == '1')
-				return 1;
-			else if (choice == '2')
-				return 2;
-			else if (choice == '3')
-				return 3;
-			else if (choice == '4')
-				return 4;
-			else if (choice == '5')
-				return 5;
-			else if (choice == '6')
-				return 6;
-			else if (choice == '7')
-				return 7;
-			else if (choice == '8')
-				return 8;
-			else if (choice == '9')
-				return 9;
-			else {
-				cct_gotoxy(10, 12);
-				cout << ' ';
-				cct_gotoxy(10, 12);
-				continue;
-			}
-		}
+	//第一个参数是指针数组，用来存提示的字符串
+	//第二个参数是一个指针，指向存序号的字符串，类似"12345670"
+	cct_cls();
+	cct_setcolor(); /* 恢复为初始颜色 */
+	cct_setcursor(CURSOR_VISIBLE_NORMAL);//打开光标
+	int cmd_y = -1;
+	char choice;
+	const char* str;
+	cout << "--------------------------------------------" << endl;
+	for (int i = 0; i < size; i++) {
+		cout << *(chc + i) << '.';
+		cout << p[i] << endl;
 	}
-	if (i == 2) {
-		cct_cls();
-		cct_setcolor(); /* 恢复为初始颜色 */
-		cct_setcursor(CURSOR_VISIBLE_NORMAL);//打开光标
+	cout << "--------------------------------------------" << endl;
+	cout << "[请选择:] ";
 
-		cout << "--------------------------------------------" << endl;
-		cout << "A.命令行找出可消除项并标识" << endl;
-		cout << "B.命令行完成一次消除（分步骤显示）" << endl;
-		cout << "C.命令行完成一关（分步骤显示）" << endl;
-		cout << "D.伪图形界面下用鼠标选择一个色块（无分隔线）" << endl;
-		cout << "E.伪图形界面下用鼠标选择一个色块（有分隔线）" << endl;
-		cout << "F.伪图形界面完成一次消除（分步骤）" << endl;
-		cout << "G.伪图形界面完整版" << endl;
-		cout << "Q.退出" << endl;
-		cout << "--------------------------------------------" << endl;
-		cout << "[请选择:] ";
+	if (prj == 1)
+		cmd_y = 12;
+	if (prj == 2)
+		cmd_y = 10;
+	if (prj == 3)
+		cmd_y = 9;
 
-		char choice;
-		while (1) {
-			choice = _getche();
-			Sleep(200);
-			if (choice == 'q' || choice == 'Q')
-				return 0;
-			else if (choice == 'a' || choice == 'A')
-				return 1;
-			else if (choice == 'b' || choice == 'B')
-				return 2;
-			else if (choice == 'c' || choice == 'C')
-				return 3;
-			else if (choice == 'd' || choice == 'D')
-				return 4;
-			else if (choice == 'e' || choice == 'E')
-				return 5;
-			else if (choice == 'f' || choice == 'F')
-				return 6;
-			else if (choice == 'g' || choice == 'G')
-				return 7;
-			else {
-				cct_gotoxy(10, 10);
-				cout << ' ';
-				cct_gotoxy(10, 10);
-				continue;
-			}
+	while (1) {
+		choice = _getche();
+		str = strchr(chc, choice);
+		if (str == NULL) {
+			cct_gotoxy(10, cmd_y);
+			cout << ' ';
+			cct_gotoxy(10, cmd_y);
 		}
-	}
-	if (i == 3) {
-		cct_cls();
-		cct_setcolor(); /* 恢复为初始颜色 */
-		cct_setcursor(CURSOR_VISIBLE_NORMAL);//打开光标
-
-		cout << "--------------------------------------------" << endl;
-		cout << "1.命令行完成一个数字的旋转" << endl;
-		cout << "2.伪图形界面下完成一个数字的下落(包括↓的功能)" << endl;
-		cout << "3.伪图形界面下完成一个数字的下落和旋转(包括↓的功能)" << endl;
-		cout << "4.伪图形界面下完成一个数字的所有功能" << endl;
-		cout << "5.伪图形界面下实现一次消除" << endl;
-		cout << "6.伪图形界面下完整游戏" << endl;
-		cout << "0.退出" << endl;
-		cout << "--------------------------------------------" << endl;
-		cout << "[请选择:] ";
-
-		char choice;
-		while (1) {
-			choice = _getche();
-			if (choice == '0')
-				return 0;
-			else if (choice == '1')
-				return 1;
-			else if (choice == '2')
-				return 2;
-			else if (choice == '3')
-				return 3;
-			else if (choice == '4')
-				return 4;
-			else if (choice == '5')
-				return 5;
-			else if (choice == '6')
-				return 6;
-			else {
-				cct_gotoxy(10, 9);
-				cout << ' ';
-				cct_gotoxy(10, 9);
-				continue;
-			}
-		}
+		else
+			return str - chc + 1;
 	}
 	return -1;
 }
+
 
 /*输入行列*/
 void input(int* row, int* col, int mode)//row h;col w

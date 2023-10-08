@@ -205,24 +205,34 @@ int main()
 	cct_setconsoleborder(84, 46);//cmd窗口大小
 	cct_setfontsize("新宋体", 28);/* 设置新宋体，28点阵 */
 
+	const char* p[8] = { "命令行找出可消除项并标识",
+						"命令行完成一次消除（分步骤显示）",
+						"命令行完成一关（分步骤显示）",
+						"伪图形界面下用鼠标选择一个色块（无分隔线）",
+						"伪图形界面下用鼠标选择一个色块（有分隔线）",
+						"伪图形界面完成一次消除（分步骤）",
+						"伪图形界面完整版",
+						"退出" };
+	const char* choice = "ABCDEFGQabcdefgq";
+
 	int choose;
 	while (1) {
-		choose = menu(2);
-		if (choose == 1)
+		choose = Menu(p, choice, 8, 2);
+		if (choose == 1 || choose == 9)
 			menu_A();
-		if (choose == 2)
+		if (choose == 2 || choose == 10)
 			menu_B();
-		if (choose == 3)
+		if (choose == 3 || choose == 11)
 			menu_C();
-		if (choose == 4)
+		if (choose == 4 || choose == 12)
 			menu_D();
-		if (choose == 5)
+		if (choose == 5 || choose == 13)
 			menu_E();
-		if (choose == 6)
+		if (choose == 6 || choose == 14)
 			menu_F();
-		if (choose == 7)
+		if (choose == 7 || choose == 15)
 			menu_G();
-		if (choose == 0)
+		if (choose == 8 || choose == 16)
 			break;
 	}
 	for (int i = 0; i < 13; i++)

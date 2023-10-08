@@ -1,4 +1,4 @@
-//2251206 ·ëÓğĞ¾ ĞÅ06 
+//2251206 ·ëÓğĞ¾ ¼Æ¿Æ 
 #include <iostream>
 #include <iomanip>
 #include <Windows.h>

@@ -36,7 +36,7 @@ const int xa = 12, xb = 44, xc = 76;
 ***************************************************************************/
 void choice(int choose)
 {
-	if (choose == 0) {
+	if (choose == 10) {
 		cct_gotoxy(0, 38);
 		return;
 	}

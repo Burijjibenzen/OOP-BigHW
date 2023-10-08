@@ -152,6 +152,7 @@ void menu6()
 	int cntr_x = 0, cntr_y = 0;
 	int score = 0, line = 0;
 	int current_num = get_next_num(true, (unsigned int)time(0));
+	int operate;
 
 	while (1) {
 		int next_num = get_next_num(false, (unsigned int)time(0));
@@ -160,8 +161,9 @@ void menu6()
 		//在此处判断死没死
 		if (death(inner_array, width) == 1)
 			break;
-		opr(inner_array, color_array, current_num, height, width, cntr_x, cntr_y, score, line, 6);
-
+		operate = opr(inner_array, color_array, current_num, height, width, cntr_x, cntr_y, score, line, 6);
+		if (operate == 1)
+			break;
 		current_num = next_num;
 	}
 
@@ -177,9 +179,17 @@ int main()
 	//cct_showstr(10, 10, "Hello, world!", COLOR_HYELLOW, COLOR_HBLUE);
 	cct_setcolor();
 
+	const char* p[7] = { "命令行完成一个数字的旋转",
+						"伪图形界面下完成一个数字的下落(包括↓的功能)",
+						"伪图形界面下完成一个数字的下落和旋转(包括↓的功能)",
+						"伪图形界面下完成一个数字的所有功能",
+						"伪图形界面下实现一次消除",
+						"伪图形界面下完整游戏",
+						"退出" };
+	const char* choice = "1234560";
 	int choose;
 	while (1) {
-		choose = menu(3);
+		choose = Menu(p, choice, 7, 3);
 		if (choose == 1)
 			menu1();
 		if (choose == 2)
@@ -192,7 +202,7 @@ int main()
 			menu5();
 		if (choose == 6)
 			menu6();
-		if (choose == 0)
+		if (choose == 7)
 			break;
 	}
 	for (int i = 0; i < 13; i++)
