@@ -15,16 +15,42 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="cmd_console_tools.h">
+    <ClCompile Include="test_hdc.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="test_draw_peppapig.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="2150244-黄隽阳-hdc_math.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="2150244-黄隽阳-hdc_cartoon.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="hdc_math.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="hdc_cartoon.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\cmd_console_tools.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\cmd_hdc_tools.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="hdc_student_works.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="cmd_hdc_tools.h">
+    <ClInclude Include="..\include\cmd_console_tools.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="common_menu.h">
+    <ClInclude Include="..\include\cmd_hdc_tools.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="lib_thdc_tools.h">
+    <ClInclude Include="..\include\lib_thdc_tools.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
