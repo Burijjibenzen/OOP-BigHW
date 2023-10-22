@@ -140,14 +140,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\common\cmd_console_tools.cpp" />
-    <ClCompile Include="..\common\common_menu.cpp" />
+    <ClCompile Include="..\common\common_functions.cpp" />
     <ClCompile Include="90-02-b1-tools.cpp" />
     <ClCompile Include="90-02-b1-console.cpp" />
     <ClCompile Include="90-02-b1-main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\cmd_console_tools.h" />
-    <ClInclude Include="..\include\common_menu.h" />
+    <ClInclude Include="..\include\common_functions.h" />
     <ClInclude Include="90-02-b1.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

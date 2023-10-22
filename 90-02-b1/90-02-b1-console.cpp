@@ -4,6 +4,7 @@
 #include <iostream>
 #include "90-02-b1.h"
 #include "../include/cmd_console_tools.h"
+#include "../include/common_functions.h"
 #include <time.h>
 #include <Windows.h>
 #include <conio.h>
@@ -68,38 +69,6 @@ void tips(int& next_num, int score, int line, int& w)
 	cout << "本次消除行数：" << line;
 	cct_gotoxy(w * 6 + 10, 6);
 	cout << "按esc键退出";
-}
-
-/*打印星星*/
-void star(int x_star, int y_star, int current_num)
-{
-	if (current_num == 0)
-		cct_setcolor(COLOR_BLUE, COLOR_BLACK);
-	if (current_num == 1)
-		cct_setcolor(COLOR_GREEN, COLOR_BLACK);
-	if (current_num == 2)
-		cct_setcolor(COLOR_CYAN, COLOR_BLACK);
-	if (current_num == 3)
-		cct_setcolor(COLOR_RED, COLOR_BLACK);
-	if (current_num == 4)
-		cct_setcolor(COLOR_PINK, COLOR_BLACK);
-	if (current_num == 5)
-		cct_setcolor(COLOR_YELLOW, COLOR_BLACK);
-	if (current_num == 6)
-		cct_setcolor(COLOR_HYELLOW, COLOR_BLACK);
-	if (current_num == 7)
-		cct_setcolor(COLOR_HRED, COLOR_BLACK);
-	if (current_num == 8)
-		cct_setcolor(COLOR_HBLUE, COLOR_BLACK);
-	if (current_num == 9)
-		cct_setcolor(COLOR_HGREEN, COLOR_BLACK);
-	cct_gotoxy(x_star, y_star);
-	cout << "╔═╗";
-	cct_gotoxy(x_star, y_star + 1);
-	cout << "║★║";
-	cct_gotoxy(x_star, y_star + 2);
-	cout << "╚═╝";
-	cct_setcolor();
 }
 
 /*恢复原状*/
