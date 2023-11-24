@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{9cdf1bb9-7135-4a32-ab88-0638db7fb863}</ProjectGuid>
-    <RootNamespace>common</RootNamespace>
+    <ProjectGuid>{b18e79bc-b1e7-4baf-af7e-2e2ce2712144}</ProjectGuid>
+    <RootNamespace>testargsanalysetools</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -70,18 +70,6 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LinkIncremental>true</LinkIncremental>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <LinkIncremental>false</LinkIncremental>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <LinkIncremental>true</LinkIncremental>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <LinkIncremental>false</LinkIncremental>
-  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -139,10 +127,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="class_aat.cpp" />
-    <ClCompile Include="cmd_console_tools.cpp" />
-    <ClCompile Include="cmd_hdc_tools.cpp" />
-    <ClCompile Include="common_functions.cpp" />
+    <ClInclude Include="..\include\class_aat.h" />
+    <ClInclude Include="..\include\lib_aat_tools.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\common\class_aat.cpp" />
+    <ClCompile Include="test_args_analyse_tools.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="..\lib\lib_common_tools.lib" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -15,17 +15,24 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="cmd_console_tools.cpp">
+    <ClInclude Include="..\include\class_aat.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\lib_aat_tools.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\common\class_aat.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="cmd_hdc_tools.cpp">
+    <ClCompile Include="test_args_analyse_tools.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="common_functions.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="class_aat.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="..\lib\lib_common_tools.lib">
+      <Filter>资源文件</Filter>
+    </Library>
   </ItemGroup>
 </Project>
