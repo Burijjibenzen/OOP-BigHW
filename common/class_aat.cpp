@@ -512,41 +512,78 @@ const string args_analyse_tools::get_str_ipaddr() const
 ***************************************************************************/
 int args_analyse_process(const int argc, const char* const* const argv, args_analyse_tools* const args, const int follow_up_args)
 {
-	for (int i = 1; i < argc; i++) {
+	int i;
+	for (i = 1; i < argc; i++) {
 
 		//如果这个参数不是减号开头的，并且这个参数是第二个参数，那么就报错。
 		//如果这个参数不是减号开头的，并且这个参数不是第二个参数，并且这个参数的前面一个参数也不是减号开头的，那么就报错
-		if ((strlen(argv[i]) <= 2 || !(argv[i][0] == '-' && argv[i][1] == '-')) && follow_up_args == 0) {// 不是--开头的有效内容
-			if (i == 1) {
-				cout << "参数[" << argv[i] << "]格式非法(不是--开头的有效内容)." << endl;
-				return ILLEGAL;
+		if ((strlen(argv[i]) <= 2 || !(argv[i][0] == '-' && argv[i][1] == '-'))) {// 不是--开头的有效内容
+
+			if (follow_up_args == 0) {
+				if (i == 1) {
+					cout << "参数[" << argv[i] << "]格式非法(不是--开头的有效内容)." << endl;
+					return ILLEGAL;
+				}
+				if (i != 1 && (strlen(argv[i - 1]) <= 2 || !(argv[i - 1][0] == '-' && argv[i - 1][1] == '-'))) {
+					cout << "参数[" << argv[i] << "]格式非法(不是--开头的有效内容)." << endl;
+					return ILLEGAL;
+				}
+				if (i != 1) {
+					int mark;
+					bool is_included = false;
+					for (int j = 0; args[j].extargs_type != ST_EXTARGS_TYPE::null; j++) {
+						ostringstream name;
+						name << argv[i - 1];
+						if (name.str() == args[j].args_name) {
+							is_included = true;
+							mark = j;
+							break;
+						}
+					}
+					if (is_included == true && args[mark].extargs_type == ST_EXTARGS_TYPE::boolean) {
+						cout << "参数[" << argv[i] << "]格式非法(不是--开头的有效内容)." << endl;
+						return ILLEGAL;
+					}
+				}
 			}
-			if (i != 1 && (strlen(argv[i - 1]) <= 2 || !(argv[i - 1][0] == '-' && argv[i - 1][1] == '-'))) {
-				cout << "参数[" << argv[i] << "]格式非法(不是--开头的有效内容)." << endl;
-				return ILLEGAL;
-			}
-			if (i != 1 && (strcmp(argv[i - 1], "--bool") == 0 || strcmp(argv[i - 1], "--help") == 0)) {
-				cout << "参数[" << argv[i] << "]格式非法(不是--开头的有效内容)." << endl;
-				return ILLEGAL;
+			else {
+				if (i == 1)
+					return i;
+				if (i != 1 && (strlen(argv[i - 1]) <= 2 || !(argv[i - 1][0] == '-' && argv[i - 1][1] == '-')))
+					return i;
+				if (i != 1) {
+					int mark;
+					bool is_included = false;
+					for (int j = 0; args[j].extargs_type != ST_EXTARGS_TYPE::null; j++) {
+						ostringstream name;
+						name << argv[i - 1];
+						if (name.str() == args[j].args_name) {
+							is_included = true;
+							mark = j;
+							break;
+						}
+					}
+					if (is_included == true && args[mark].extargs_type == ST_EXTARGS_TYPE::boolean)
+						return i;
+				}
 			}
 		}
 		else { // 是--开头的有效内容 分析是否在args内
 			bool is_included = false;
 			int mark;
-			for (int j = 0; args[j].extargs_type != ST_EXTARGS_TYPE::null; j++)
-				if (strcmp(argv[i], args[j].args_name.c_str()) == 0) {
+			for (int j = 0; args[j].extargs_type != ST_EXTARGS_TYPE::null; j++) {
+				ostringstream name;
+				name << argv[i];
+				if (name.str() == args[j].args_name) {
 					is_included = true;
 					mark = j;
 					break;
 				}
+			}
 
 			if (is_included == false) {
-				if (follow_up_args == 0) {
-					cout << "参数[" << argv[i] << "]非法." << endl;
-					return ILLEGAL;
-				}
-				else
-					return i;
+				cout << "参数[" << argv[i] << "]非法." << endl;
+				return ILLEGAL;
 			}
 			else { //找到了argv[i]
 				// 如果重复了
@@ -555,12 +592,12 @@ int args_analyse_process(const int argc, const char* const* const argv, args_ana
 					return ILLEGAL;
 				}
 				// 如果是--bool/--help
-				if (strcmp(argv[i], "--bool") == 0 || strcmp(argv[i], "--help") == 0) {
+				if (args[mark].extargs_type == ST_EXTARGS_TYPE::boolean) {
 					args[mark].args_existed = 1;
 					args[mark].value = "true";
 				}
 				else {
-					if (strcmp(argv[i], "--intdef") == 0) {
+					if (args[mark].extargs_type == ST_EXTARGS_TYPE::int_with_default) {
 						if (i == argc - 1) { // 后面没有了！
 							cout << "参数[" << argv[i] << "]的附加参数不足. (类型:int, 范围" << args[mark].range << " 缺省:" << args[mark].deft << ")\n";
 							return ILLEGAL;
@@ -589,14 +626,16 @@ int args_analyse_process(const int argc, const char* const* const argv, args_ana
 								args[mark].args_existed = 1;
 								if (value > args[mark].extargs_int_max || value < args[mark].extargs_int_min) {
 									args[mark].value = args[mark].deft;
+									args[mark].extargs_int_value = args[mark].extargs_int_default;
+								}
+								else {
+									args[mark].value = out1.str();
 									args[mark].extargs_int_value = value;
 								}
-								else
-									args[mark].value = out1.str();
 							}
 						}
 					}
-					if (strcmp(argv[i], "--interr") == 0) {
+					if (args[mark].extargs_type == ST_EXTARGS_TYPE::int_with_error) {
 						if (i == argc - 1) { // 后面没有了！
 							cout << "参数[" << argv[i] << "]的附加参数不足. (类型:int, 范围" << args[mark].range << ")\n";
 							return ILLEGAL;
@@ -634,7 +673,7 @@ int args_analyse_process(const int argc, const char* const* const argv, args_ana
 							}
 						}
 					}
-					if (strcmp(argv[i], "--intsetdef") == 0) {
+					if (args[mark].extargs_type == ST_EXTARGS_TYPE::int_with_set_default) {
 						if (i == argc - 1) { // 后面没有了！
 							cout << "参数[" << argv[i] << "]的附加参数不足. (类型:int, 可取值[" << args[mark].range << "] 缺省:" << args[mark].deft << ")\n";
 							return ILLEGAL;
@@ -677,7 +716,7 @@ int args_analyse_process(const int argc, const char* const* const argv, args_ana
 						}
 
 					}
-					if (strcmp(argv[i], "--intseterr") == 0) {
+					if (args[mark].extargs_type == ST_EXTARGS_TYPE::int_with_set_error) {
 						if (i == argc - 1) { // 后面没有了！
 							cout << "参数[" << argv[i] << "]的附加参数不足. (类型:int, 可取值[" << args[mark].range << "]" << ")\n";
 							return ILLEGAL;
@@ -721,14 +760,20 @@ int args_analyse_process(const int argc, const char* const* const argv, args_ana
 							}
 						}
 					}
-					if (strcmp(argv[i], "--str1") == 0) {
+					if (args[mark].extargs_type == ST_EXTARGS_TYPE::str) {
 						if (i == argc - 1) { // 后面没有了！
-							cout << "参数[" << argv[i] << "]的附加参数不足. (类型:string)\n";
+							if (args[mark].deft != "/")
+								cout << "参数[" << argv[i] << "]的附加参数不足. (类型:string 缺省:" << args[mark].deft << ")\n";
+							else
+								cout << "参数[" << argv[i] << "]的附加参数不足. (类型:string)\n";
 							return ILLEGAL;
 						}
 						else { // 后面还有
 							if (strlen(argv[i + 1]) >= 2 && argv[i + 1][0] == '-' && argv[i + 1][1] == '-') {
-								cout << "参数[" << argv[i] << "]缺少附加参数. (类型:string)\n";
+								if (args[mark].deft != "/")
+									cout << "参数[" << argv[i] << "]的附加参数不足. (类型:string 缺省:" << args[mark].deft << ")\n";
+								else
+									cout << "参数[" << argv[i] << "]的附加参数不足. (类型:string)\n";
 								return ILLEGAL;
 							}
 							else {
@@ -738,24 +783,7 @@ int args_analyse_process(const int argc, const char* const* const argv, args_ana
 							}
 						}
 					}
-					if (strcmp(argv[i], "--str2") == 0) {
-						if (i == argc - 1) { // 后面没有了！
-							cout << "参数[" << argv[i] << "]的附加参数不足. (类型:string 缺省:" << args[mark].deft << ")\n";
-							return ILLEGAL;
-						}
-						else { // 后面还有
-							if (strlen(argv[i + 1]) >= 2 && argv[i + 1][0] == '-' && argv[i + 1][1] == '-') {
-								cout << "参数[" << argv[i] << "]缺少附加参数. (类型:string 缺省:" << args[mark].deft << ")\n";
-								return ILLEGAL;
-							}
-							else {
-								args[mark].args_existed = 1;
-								args[mark].extargs_string_value = argv[i + 1];
-								args[mark].value = argv[i + 1];
-							}
-						}
-					}
-					if (strcmp(argv[i], "--strsetdef") == 0) {
+					if (args[mark].extargs_type == ST_EXTARGS_TYPE::str_with_set_default) {
 						if (i == argc - 1) { // 后面没有了！
 							cout << "参数[" << argv[i] << "]的附加参数不足. (类型:string, 可取值[" << args[mark].range << "] 缺省:" << args[mark].deft << ")\n";
 							return ILLEGAL;
@@ -782,7 +810,7 @@ int args_analyse_process(const int argc, const char* const* const argv, args_ana
 							}
 						}
 					}
-					if (strcmp(argv[i], "--strseterr") == 0) {
+					if (args[mark].extargs_type == ST_EXTARGS_TYPE::str_with_set_error) {
 						if (i == argc - 1) { // 后面没有了！
 							cout << "参数[" << argv[i] << "]的附加参数不足. (类型:string, 可取值[" << args[mark].range << "])\n";
 							return ILLEGAL;
@@ -811,7 +839,7 @@ int args_analyse_process(const int argc, const char* const* const argv, args_ana
 							}
 						}
 					}
-					if (strcmp(argv[i], "--ipdef") == 0) {
+					if (args[mark].extargs_type == ST_EXTARGS_TYPE::ipaddr_with_default) {
 						if (i == argc - 1) { // 后面没有了！
 							cout << "参数[" << argv[i] << "]的附加参数不足. (类型:IP地址)\n";
 							return ILLEGAL;
@@ -835,7 +863,7 @@ int args_analyse_process(const int argc, const char* const* const argv, args_ana
 							}
 						}
 					}
-					if (strcmp(argv[i], "--iperr") == 0) {
+					if (args[mark].extargs_type == ST_EXTARGS_TYPE::ipaddr_with_error) {
 						if (i == argc - 1) { // 后面没有了！
 							cout << "参数[" << argv[i] << "]的附加参数不足. (类型:IP地址)\n";
 							return ILLEGAL;
@@ -863,7 +891,7 @@ int args_analyse_process(const int argc, const char* const* const argv, args_ana
 			}
 		}
 	}
-	return 0; //此句根据需要修改
+	return argc; //此句根据需要修改
 }
 
 
