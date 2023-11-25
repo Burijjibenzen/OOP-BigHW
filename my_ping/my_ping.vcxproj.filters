@@ -27,9 +27,4 @@
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
-  <ItemGroup>
-    <Library Include="..\lib\lib_common_tools.lib">
-      <Filter>资源文件</Filter>
-    </Library>
-  </ItemGroup>
 </Project>

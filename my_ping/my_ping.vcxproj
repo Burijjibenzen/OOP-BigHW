@@ -133,9 +133,6 @@
   <ItemGroup>
     <ClInclude Include="..\include\class_aat.h" />
   </ItemGroup>
-  <ItemGroup>
-    <Library Include="..\lib\lib_common_tools.lib" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

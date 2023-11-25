@@ -134,9 +134,6 @@
     <ClCompile Include="..\common\class_aat.cpp" />
     <ClCompile Include="test_args_analyse_tools.cpp" />
   </ItemGroup>
-  <ItemGroup>
-    <Library Include="..\lib\lib_common_tools.lib" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
