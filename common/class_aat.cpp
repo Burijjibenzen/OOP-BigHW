@@ -269,9 +269,8 @@ args_analyse_tools::args_analyse_tools(const char* name, const ST_EXTARGS_TYPE t
 		return;
 	}
 	if (def != "") {
-		ostringstream out;
-		out << def;
-		strcpy(deft, out.str().c_str());
+		istringstream in(def);
+		in >> deft;
 	}
 	else
 		strcpy(deft, "/");
@@ -598,6 +597,9 @@ int args_analyse_process(const int argc, const char* const* const argv, args_ana
 				}
 				else {
 					if (args[mark].extargs_type == ST_EXTARGS_TYPE::int_with_default) {
+						args[mark].args_existed = 1;
+						args[mark].value = args[mark].deft;
+						args[mark].extargs_int_value = args[mark].extargs_int_default;
 						if (i == argc - 1) { // 后面没有了！
 							cout << "参数[" << argv[i] << "]的附加参数不足. (类型:int, 范围" << args[mark].range << " 缺省:" << args[mark].deft << ")\n";
 							return ILLEGAL;
@@ -674,6 +676,7 @@ int args_analyse_process(const int argc, const char* const* const argv, args_ana
 						}
 					}
 					if (args[mark].extargs_type == ST_EXTARGS_TYPE::int_with_set_default) {
+						args[mark].args_existed = 1;
 						if (i == argc - 1) { // 后面没有了！
 							cout << "参数[" << argv[i] << "]的附加参数不足. (类型:int, 可取值[" << args[mark].range << "] 缺省:" << args[mark].deft << ")\n";
 							return ILLEGAL;
@@ -761,8 +764,11 @@ int args_analyse_process(const int argc, const char* const* const argv, args_ana
 						}
 					}
 					if (args[mark].extargs_type == ST_EXTARGS_TYPE::str) {
+						args[mark].args_existed = 1;
+						args[mark].extargs_string_value = "";
+						args[mark].value = "";
 						if (i == argc - 1) { // 后面没有了！
-							if (args[mark].deft != "/")
+							if (strcmp(args[mark].deft, "/") != 0)
 								cout << "参数[" << argv[i] << "]的附加参数不足. (类型:string 缺省:" << args[mark].deft << ")\n";
 							else
 								cout << "参数[" << argv[i] << "]的附加参数不足. (类型:string)\n";
@@ -770,7 +776,7 @@ int args_analyse_process(const int argc, const char* const* const argv, args_ana
 						}
 						else { // 后面还有
 							if (strlen(argv[i + 1]) >= 2 && argv[i + 1][0] == '-' && argv[i + 1][1] == '-') {
-								if (args[mark].deft != "/")
+								if (strcmp(args[mark].deft, "/") != 0)
 									cout << "参数[" << argv[i] << "]的附加参数不足. (类型:string 缺省:" << args[mark].deft << ")\n";
 								else
 									cout << "参数[" << argv[i] << "]的附加参数不足. (类型:string)\n";
@@ -811,6 +817,8 @@ int args_analyse_process(const int argc, const char* const* const argv, args_ana
 						}
 					}
 					if (args[mark].extargs_type == ST_EXTARGS_TYPE::str_with_set_error) {
+						args[mark].args_existed = 1;
+						args[mark].value = args[mark].extargs_string_set[0];
 						if (i == argc - 1) { // 后面没有了！
 							cout << "参数[" << argv[i] << "]的附加参数不足. (类型:string, 可取值[" << args[mark].range << "])\n";
 							return ILLEGAL;

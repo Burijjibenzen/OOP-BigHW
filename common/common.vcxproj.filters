@@ -27,5 +27,8 @@
     <ClCompile Include="class_aat.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="file.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

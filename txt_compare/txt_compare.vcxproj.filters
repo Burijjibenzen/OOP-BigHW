@@ -15,26 +15,36 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="cmd_console_tools.h">
+    <ClCompile Include="txt_compare_main.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\class_aat.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\file.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\cmd_console_tools.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\include\class_aat.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="cmd_hdc_tools.h">
+    <ClInclude Include="..\include\lib_aat_tools.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="lib_thdc_tools.h">
+    <ClInclude Include="..\include\cmd_console_tools.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="common_functions.h">
+    <ClInclude Include="..\include\file.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="class_aat.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="lib_aat_tools.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="file.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="..\lib\lib_common_tools.lib">
+      <Filter>资源文件</Filter>
+    </Library>
   </ItemGroup>
 </Project>

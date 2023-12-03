@@ -143,6 +143,7 @@
     <ClCompile Include="cmd_console_tools.cpp" />
     <ClCompile Include="cmd_hdc_tools.cpp" />
     <ClCompile Include="common_functions.cpp" />
+    <ClCompile Include="file.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
