@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="bitmap_image.h" />
     <ClInclude Include="class_aat.h" />
     <ClInclude Include="cmd_console_tools.h" />
     <ClInclude Include="cmd_hdc_tools.h" />
