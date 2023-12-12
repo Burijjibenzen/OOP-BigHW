@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{9cdf1bb9-7135-4a32-ab88-0638db7fb863}</ProjectGuid>
-    <RootNamespace>common</RootNamespace>
+    <ProjectGuid>{3a7bcdb7-907f-4baa-87e3-c9161e5c96fc}</ProjectGuid>
+    <RootNamespace>txtcompare</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -70,18 +70,6 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LinkIncremental>true</LinkIncremental>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <LinkIncremental>false</LinkIncremental>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <LinkIncremental>true</LinkIncremental>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <LinkIncremental>false</LinkIncremental>
-  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -139,12 +127,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="bitmap_image.cpp" />
-    <ClCompile Include="class_aat.cpp" />
-    <ClCompile Include="cmd_console_tools.cpp" />
-    <ClCompile Include="cmd_hdc_tools.cpp" />
-    <ClCompile Include="common_functions.cpp" />
-    <ClCompile Include="file.cpp" />
+    <ClCompile Include="..\common\class_aat.cpp" />
+    <ClCompile Include="..\common\cmd_console_tools.cpp" />
+    <ClCompile Include="..\common\file.cpp" />
+    <ClCompile Include="txt_compare_main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\include\class_aat.h" />
+    <ClInclude Include="..\include\cmd_console_tools.h" />
+    <ClInclude Include="..\include\file.h" />
+    <ClInclude Include="..\include\lib_aat_tools.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

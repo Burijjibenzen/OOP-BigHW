@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{9cdf1bb9-7135-4a32-ab88-0638db7fb863}</ProjectGuid>
-    <RootNamespace>common</RootNamespace>
+    <ProjectGuid>{1ba2f764-8aae-4916-b0b1-22e0c304277d}</ProjectGuid>
+    <RootNamespace>bmpsubtitles</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -70,18 +70,6 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LinkIncremental>true</LinkIncremental>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <LinkIncremental>false</LinkIncremental>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <LinkIncremental>true</LinkIncremental>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <LinkIncremental>false</LinkIncremental>
-  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -139,12 +127,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="bitmap_image.cpp" />
-    <ClCompile Include="class_aat.cpp" />
-    <ClCompile Include="cmd_console_tools.cpp" />
-    <ClCompile Include="cmd_hdc_tools.cpp" />
-    <ClCompile Include="common_functions.cpp" />
-    <ClCompile Include="file.cpp" />
+    <ClInclude Include="..\include\bitmap_image.h" />
+    <ClInclude Include="..\include\class_aat.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\common\bitmap_image.cpp" />
+    <ClCompile Include="..\common\class_aat.cpp" />
+    <ClCompile Include="bmp_subtitles_main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -24,7 +24,7 @@
     <ClCompile Include="..\common\cmd_console_tools.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\common\common_menu.cpp">
+    <ClCompile Include="..\common\common_functions.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
@@ -35,7 +35,7 @@
     <ClInclude Include="..\include\cmd_console_tools.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\common_menu.h">
+    <ClInclude Include="..\include\common_functions.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

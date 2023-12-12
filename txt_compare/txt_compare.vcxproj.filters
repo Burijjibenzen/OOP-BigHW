@@ -15,30 +15,30 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="90-02-b1-main.cpp">
+    <ClCompile Include="txt_compare_main.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\class_aat.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\file.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\common\cmd_console_tools.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="90-02-b1-tools.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="90-02-b1-console.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\common\common_functions.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\include\class_aat.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\lib_aat_tools.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
     <ClInclude Include="..\include\cmd_console_tools.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="90-02-b1.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\common_functions.h">
+    <ClInclude Include="..\include\file.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

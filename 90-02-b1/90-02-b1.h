@@ -1,7 +1,6 @@
 // 2251206 ·ëÓğĞ¾ ¼Æ¿Æ
 #pragma once
 
-void input(int* h, int* w);
 void generate_array(char(*p)[23], int& h, int& w);
 void current_array(char(*p)[23], int& h, int& w);
 
@@ -16,7 +15,6 @@ void end(void);
 void frame(int& h, int& w);
 void tips(int& next_num, int score, int line, int& w);
 
-void star(int x_star, int y_star, int current_num);
 void clear(int x_star, int y_star);
 
 int clearup(char(*p)[23], char(*q)[23], int& h, int& w);

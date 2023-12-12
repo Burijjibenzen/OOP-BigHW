@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{1a17492b-c5f3-4eac-af22-4c53c5ea5de2}</ProjectGuid>
-    <RootNamespace>lib</RootNamespace>
+    <ProjectGuid>{0b376ba3-652d-4967-b74e-80bb50c6a8df}</ProjectGuid>
+    <RootNamespace>myping</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -126,6 +126,13 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\common\class_aat.cpp" />
+    <ClCompile Include="my_ping.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\include\class_aat.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
