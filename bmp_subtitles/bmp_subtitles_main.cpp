@@ -251,5 +251,7 @@ int main(int argc, char** argv)
 			in.seekg(0, ios::beg);
 		}*/
 	}
+	bmp.close();
+	edit.close();
 	return 0;
 }
