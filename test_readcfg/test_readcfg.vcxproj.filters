@@ -15,26 +15,28 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="cmd_console_tools.cpp">
+    <ClCompile Include="test_readcfg.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="cmd_hdc_tools.cpp">
+    <ClCompile Include="..\common\class_crt.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="common_functions.cpp">
+    <ClCompile Include="..\common\class_aat.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="class_aat.cpp">
+    <ClCompile Include="..\common\file.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="file.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="bitmap_image.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="class_crt.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\include\class_crt.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\class_aat.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\file.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
