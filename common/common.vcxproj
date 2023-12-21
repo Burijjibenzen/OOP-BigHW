@@ -141,6 +141,7 @@
   <ItemGroup>
     <ClCompile Include="bitmap_image.cpp" />
     <ClCompile Include="class_aat.cpp" />
+    <ClCompile Include="class_crt.cpp" />
     <ClCompile Include="cmd_console_tools.cpp" />
     <ClCompile Include="cmd_hdc_tools.cpp" />
     <ClCompile Include="common_functions.cpp" />

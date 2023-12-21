@@ -39,5 +39,8 @@
     <ClInclude Include="bitmap_image.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="class_crt.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

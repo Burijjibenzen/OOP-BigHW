@@ -101,3 +101,15 @@ void filetohex(const char* s, bool eof)
 	}
 }
 
+int skip(char* s)
+{
+	if (!s)
+		return -1;
+
+	for (unsigned int i = 0; i < strlen(s); i++)
+		if (s[i] == ';' || s[i] == '#') {
+			s[i] = '\0';
+			break;
+		}
+	return 0;
+}
