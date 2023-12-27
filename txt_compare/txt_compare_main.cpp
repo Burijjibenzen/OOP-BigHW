@@ -163,7 +163,7 @@ int main(int argc, char** argv)
 		args_analyse_tools("--display",			ST_EXTARGS_TYPE::str_with_set_error, 1, 0, DisplayType),
 		args_analyse_tools()  //最后一个，用于结束
 	};
-	int cur_argc, ret = 0;
+	int cur_argc;
 
 	//最后一个参数1，表示除选项参数外，还有其它参数
 	if ((cur_argc = args_analyse_process(argc, argv, args, 0)) < 0) {
