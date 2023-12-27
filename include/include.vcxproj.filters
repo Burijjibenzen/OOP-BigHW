@@ -42,5 +42,8 @@
     <ClInclude Include="class_crt.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="hw_check.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
